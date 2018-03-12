@@ -111,3 +111,13 @@ Several kinds of client software need to be developed in order to interact with 
 
 A Note about the *Productivist device*: The device (Productivist WP ch. 3.2) is primarily intended to control the manufacturing process, hence run a **Controller** client software. However, while it may end-up holding all 4 kinds of client software, it is currently not intended to hold a blockchain peer.
 
+#### Orderers
+
+The Hyperledger blockchain Orderer network is managed by the Productivist organization. While adding specific channels for 3rd party organizations is on the Productivist roadmap, providing 3rd parties with their own orderers is not. This policy may evolve if a relevant use case arises that would justify delegating part of the orderer network to 3rd parties.
+
+#### Certificate Authority servers
+
+The CA servers and Membership services manager systems are run by the Productivist organization, as far as the **Roles** management is concerned. Individual members are granted membership to any and all of the Customer / Designer / Producer / Expert roles they can take.
+
+As for private channels managed by 3rd parties, the relevant actors will be granted their own CAs on demand.
+
