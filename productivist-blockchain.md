@@ -21,6 +21,7 @@
     + [Clients](#clients)
     + [Orderers](#orderers)
     + [Certificate Authority servers](#certificate-authority-servers)
+- [Blockchain applications](#blockchain-applications)
 
 <!-- tocstop -->
 
@@ -88,6 +89,7 @@ These are the smart-contracts and applications provided by the Productivist orga
 
   * **productoken**: Tokenized service marketplace
   * **modelcert**: Pre-production 3D model certification
+  * **prodcontrol**: Triggers object production from a model.
   * **qualitycheck**: Post-production object validation
 
 ##### User applications
@@ -129,7 +131,7 @@ Several kinds of client software need to be developed in order to interact with 
 
   * **Wallets**: The client-side for the **productoken** chaincode. Holds the membership information and credentials for all participants.
   * **Modelers**: Where a **Designer** can show a model to a **Customer**, and an **Expert** can validate it. Client-side software for the **modelcert** chaincode. This module is intended to display and sign a model design, not to create the design itself.
-  * **Controllers**: Used by a **Producer** to build a validated design. The medium-term target for the **Controller** code is to run on the *Productivist device*, along with the **Modeler** code.
+  * **Controllers**: Used by a **Producer** to build a validated design. The medium-term target for the **Controller** code is to run on the *Productivist device*, along with the **Modeler** code. Client-side software for the **prodcontrol** chaincode. 
   * **Validators**: Used by an **Expert** to run a testing campaign on a finished product. Client-side software for the **qualitycheck** chaincode. 
 
 A Note about the *Productivist device*: The device (Productivist WP ch. 3.2) is primarily intended to control the manufacturing process, hence run a **Controller** client software. However, while it may end-up holding all 4 kinds of client software, it is currently not intended to hold a blockchain peer.
@@ -144,3 +146,14 @@ The CA servers and Membership services manager systems are run by the Productivi
 
 As for private channels managed by 3rd parties, the relevant actors will be granted their own CAs on demand.
 
+
+## Blockchain applications
+
+We are going to define here the specifications of the 4 **Productivist core blockchain applications**:
+
+  * **productoken**: Tokenized service marketplace
+  * **modelcert**: Pre-production 3D model certification
+  * **prodcontrol**: Triggers object production from a model.
+  * **qualitycheck**: Post-production object validation
+
+It is important to state that these applications, whilst functionally autonomous, are nonetheless interdependent. All production interactions in a commercial context are going to involve token transfer, hence an invocation of the **productoken** chaincode from one of the others.
