@@ -195,15 +195,76 @@ It is important to state that these applications, whilst functionally autonomous
 
 #### Synopsis
 
+The **productoken** chaincode is a basic, stateful - as opposed to bitcoin stateless UTXO model - token account management application. 
+
 #### Members and roles
 
+All participants are potentially involved in **productoken** operations. **Customers** will typically transfer tokens to **Designers** and **Producers**. **Experts** may be retributed by both parties.
+
 #### Database structure
+
+The key-value database unit entry here is a user account, and must hold at least the account balance. Minimal json structure example:
+
+```
+john_smith_uid: {
+  balance: 1000
+}
+```
 
 #### Chaincode commands
 
 ##### Invocations
 
+  * **Deposit:**
+
+```
+Command
+-------
+  uid_a: <'deposit', value>
+
+Result
+------
+  uid_a: <balance> -> <balance + value>  
+```
+
+  * **Withdrawal:**
+
+```
+Command
+-------
+  uid_a: <'withdrawal', value>
+
+Result
+------
+  uid_a: <balance> -> <balance - value>  
+```
+
+  * **Transfer:**
+
+```
+Command
+-------
+  uid_a,uid_b: <'transfer', value>
+
+Result
+------
+  uid_a: <balance> -> <balance - value>  
+  uid_b: <balance> -> <balance + value>  
+```
+
 ##### Queries
+
+  * **Balance:**
+
+```
+Query
+-------
+  uid_a: <'balance'>
+
+Result
+------
+  uid_a: <balance> -> 
+```
 
 #### Sequence diagram
 
