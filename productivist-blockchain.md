@@ -22,7 +22,7 @@
     + [Orderers](#orderers)
     + [Certificate Authority servers](#certificate-authority-servers)
 - [Blockchain applications](#blockchain-applications)
-  * [The productoken application](#the-productoken-application)
+  * [The *productoken* application](#the-productoken-application)
     + [Synopsis](#synopsis)
     + [Members and roles](#members-and-roles)
     + [Database structure](#database-structure)
@@ -30,7 +30,7 @@
       - [Invocations](#invocations)
       - [Queries](#queries)
     + [Sequence diagram](#sequence-diagram)
-  * [The modelcert application](#the-modelcert-application)
+  * [The *modelcert* application](#the-modelcert-application)
     + [Synopsis](#synopsis-1)
     + [Members and roles](#members-and-roles-1)
     + [Database structure](#database-structure-1)
@@ -38,7 +38,7 @@
       - [Invocations](#invocations-1)
       - [Queries](#queries-1)
     + [Sequence diagram](#sequence-diagram-1)
-  * [The prodcontrol application](#the-prodcontrol-application)
+  * [The *prodcontrol* application](#the-prodcontrol-application)
     + [Synopsis](#synopsis-2)
     + [Members and roles](#members-and-roles-2)
     + [Database structure](#database-structure-2)
@@ -46,7 +46,7 @@
       - [Invocations](#invocations-2)
       - [Queries](#queries-2)
     + [Sequence diagram](#sequence-diagram-2)
-  * [The qualitycheck application](#the-qualitycheck-application)
+  * [The *qualitycheck* application](#the-qualitycheck-application)
     + [Synopsis](#synopsis-3)
     + [Members and roles](#members-and-roles-3)
     + [Database structure](#database-structure-3)
@@ -191,7 +191,7 @@ We are going to define here the specifications of the 4 **Productivist core bloc
 It is important to state that these applications, whilst functionally autonomous, are nonetheless interdependent. All production interactions in a commercial context are going to involve token transfer, hence an invocation of the **productoken** chaincode from one of the others.
 
 
-### The productoken application
+### The *productoken* application
 
 #### Synopsis
 
@@ -207,7 +207,8 @@ It is important to state that these applications, whilst functionally autonomous
 
 #### Sequence diagram
 
-### The modelcert application
+
+### The *modelcert* application
 
 #### Synopsis
 
@@ -223,7 +224,8 @@ It is important to state that these applications, whilst functionally autonomous
 
 #### Sequence diagram
 
-### The prodcontrol application
+
+### The *prodcontrol* application
 
 #### Synopsis
 
@@ -239,7 +241,8 @@ It is important to state that these applications, whilst functionally autonomous
 
 #### Sequence diagram
 
-### The qualitycheck application
+
+### The *qualitycheck* application
 
 #### Synopsis
 
