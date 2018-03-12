@@ -94,3 +94,20 @@ Members roles will be implemented as organizations. In addition to industrials, 
   * **Producer** Builds physical objects, as units or series, using 3D printers or other machine tools.
   * **Expert** Certifies models, either by origin or design, and validates finished objects overall quality.
 
+### Peers, Clients, and other blockchain nodes
+
+#### Peers
+
+Blockchain peer nodes can be either managed by the Productivist organization, private entities, or conglomerates. In order to follow good governance principles, individuals fulfilling any of the Customer / Designer / Producer / Expert roles mentioned above should have access to a peer affiliated to the corresponding organization.
+
+#### Clients
+
+Several kinds of client software need to be developed in order to interact with the chaincode.
+
+  * **Wallets**: The client-side for the **productoken** chaincode. Holds the membership information and credentials for all participants.
+  * **Modelers**: Where a **Designer** can show a model to a **Customer**, and an **Expert** can validate it. Client-side software for the **modelcert** chaincode. This module is intended to display and sign a model design, not to create the design itself.
+  * **Controllers**: Used by a **Producer** to build a validated design. The medium-term target for the **Controller** code is to run on the *Productivist device*, along with the **Modeler** code.
+  * **Validators**: Used by an **Expert** to run a testing campaign on a finished product. Client-side software for the **qualitycheck** chaincode. 
+
+A Note about the *Productivist device*: The device (Productivist WP ch. 3.2) is primarily intended to control the manufacturing process, hence run a **Controller** client software. However, while it may end-up holding all 4 kinds of client software, it is currently not intended to hold a blockchain peer.
+
