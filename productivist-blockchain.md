@@ -11,7 +11,7 @@ Productivist is a blockchain for distributed manufacturing. While the project ha
 
 The [Freelabster](https://www.freelabster.com) organization is the original use case for Productivist, and the first that will make use of the Productivist blockchain. As such, Freelabster encompasses most of the needs for a production blockchain.
 
-There are 3 main types of participants, who can naturally overlap:
+There are 3 main types of members, who can naturally overlap:
 
   * Customers, who want a specific object or serie to be produced.
   * Designers, who create 3D models than can be printed.
@@ -43,9 +43,9 @@ As described in the Productivist whitepaper, the blockchain implements a layered
   * Tokenization enables commercial uses, with no exposure to crypto-currencies fluctuations
   * Private solutions for specific production eco-systems are insulated their own blockchain channels
 
-#### Participants
+#### Members
 
-These are the main types of Productivist blockchain participants. Roles will be cast for those participants, and specific organizations implemented for them on the Productivist blockchain Hyperledger network.
+These are the main types of Productivist blockchain members. Roles will be cast for those members, and specific organizations implemented for them on the Productivist blockchain Hyperledger network.
 
   * Customers / end users
   * Independant model designers
@@ -63,12 +63,34 @@ The goal here is to cover the services defined by the Freelabster use-case.
 
 These are the smart-contracts and applications provided by the Productivist organization. Transparent, open-source, they are the backbone of the Productivist service.
 
-  * Tokenized service marketplace
-  * Pre-production 3D model authentication
-  * Post-production object certification
+  * **productoken**: Tokenized service marketplace
+  * **modelcert**: Pre-production 3D model certification
+  * **qualitycheck**: Post-production object validation
 
 ##### User applications
 
 Customers running their own blockchain channels have the ability to deploy specific applications at will.
 
+
+## Blockchain architecture
+
+### Organizations and members roles
+
+Each of the individual members listed in the core blockchain overview above has a unique identifier in the blockchain, materialized by credentials and enrollment certificates. Organizations may be delegated certificate authority servers, that will allow them to create affiliated users. Roles will be implemented as organizations from which a member has to be a member in order to perform certain tasks.
+
+#### Members 
+
+Every member has at least the following attibutes:
+
+  * Credentials, including a private/public key pair managed by the network membership services.
+  * A ProducToken wallet, with a corresponding account on the **productoken** chaincode.
+
+#### Roles
+
+Members roles will be implemented as organizations. In addition to industrials, certification organisms and other entities that will have their own organization on the blockchain, the following are defined for role membership:
+
+  * **Customer** Requests an object
+  * **Designer** Creates 3D models, plans, machine tool code.
+  * **Producer** Builds physical objects, as units or series, using 3D printers or other machine tools.
+  * **Expert** Certifies models, either by origin or design, and validates finished objects overall quality.
 
