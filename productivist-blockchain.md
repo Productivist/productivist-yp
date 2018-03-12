@@ -1,5 +1,28 @@
 # The Productivist Blockchain Architecture
 
+<!-- toc -->
+
+- [Overview](#overview)
+  * [Organic, decentralized production chain](#organic-decentralized-production-chain)
+    + [The 3D printing use-case](#the-3d-printing-use-case)
+    + [Designing a blockchain architecture with Hyperledger](#designing-a-blockchain-architecture-with-hyperledger)
+  * [The Productivist core blockchain](#the-productivist-core-blockchain)
+    + [Architecture](#architecture)
+    + [Members](#members)
+    + [Productivist blockchain applications](#productivist-blockchain-applications)
+      - [Core applications](#core-applications)
+      - [User applications](#user-applications)
+- [Blockchain architecture](#blockchain-architecture)
+  * [Organizations and members roles](#organizations-and-members-roles)
+    + [Members](#members-1)
+    + [Roles](#roles)
+  * [Peers, Clients, and other blockchain nodes](#peers-clients-and-other-blockchain-nodes)
+    + [Peers](#peers)
+    + [Clients](#clients)
+    + [Orderers](#orderers)
+    + [Certificate Authority servers](#certificate-authority-servers)
+
+<!-- tocstop -->
 
 ## Overview
 
