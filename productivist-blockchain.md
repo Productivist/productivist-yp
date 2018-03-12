@@ -22,6 +22,38 @@
     + [Orderers](#orderers)
     + [Certificate Authority servers](#certificate-authority-servers)
 - [Blockchain applications](#blockchain-applications)
+  * [The productoken application](#the-productoken-application)
+    + [Synopsis](#synopsis)
+    + [Members and roles](#members-and-roles)
+    + [Database structure](#database-structure)
+    + [Chaincode commands](#chaincode-commands)
+      - [Invocations](#invocations)
+      - [Queries](#queries)
+    + [Sequence diagram](#sequence-diagram)
+  * [The modelcert application](#the-modelcert-application)
+    + [Synopsis](#synopsis-1)
+    + [Members and roles](#members-and-roles-1)
+    + [Database structure](#database-structure-1)
+    + [Chaincode commands](#chaincode-commands-1)
+      - [Invocations](#invocations-1)
+      - [Queries](#queries-1)
+    + [Sequence diagram](#sequence-diagram-1)
+  * [The prodcontrol application](#the-prodcontrol-application)
+    + [Synopsis](#synopsis-2)
+    + [Members and roles](#members-and-roles-2)
+    + [Database structure](#database-structure-2)
+    + [Chaincode commands](#chaincode-commands-2)
+      - [Invocations](#invocations-2)
+      - [Queries](#queries-2)
+    + [Sequence diagram](#sequence-diagram-2)
+  * [The qualitycheck application](#the-qualitycheck-application)
+    + [Synopsis](#synopsis-3)
+    + [Members and roles](#members-and-roles-3)
+    + [Database structure](#database-structure-3)
+    + [Chaincode commands](#chaincode-commands-3)
+      - [Invocations](#invocations-3)
+      - [Queries](#queries-3)
+    + [Sequence diagram](#sequence-diagram-3)
 
 <!-- tocstop -->
 
@@ -157,3 +189,69 @@ We are going to define here the specifications of the 4 **Productivist core bloc
   * **qualitycheck**: Post-production object validation
 
 It is important to state that these applications, whilst functionally autonomous, are nonetheless interdependent. All production interactions in a commercial context are going to involve token transfer, hence an invocation of the **productoken** chaincode from one of the others.
+
+
+### The productoken application
+
+#### Synopsis
+
+#### Members and roles
+
+#### Database structure
+
+#### Chaincode commands
+
+##### Invocations
+
+##### Queries
+
+#### Sequence diagram
+
+### The modelcert application
+
+#### Synopsis
+
+#### Members and roles
+
+#### Database structure
+
+#### Chaincode commands
+
+##### Invocations
+
+##### Queries
+
+#### Sequence diagram
+
+### The prodcontrol application
+
+#### Synopsis
+
+#### Members and roles
+
+#### Database structure
+
+#### Chaincode commands
+
+##### Invocations
+
+##### Queries
+
+#### Sequence diagram
+
+### The qualitycheck application
+
+#### Synopsis
+
+#### Members and roles
+
+#### Database structure
+
+#### Chaincode commands
+
+##### Invocations
+
+##### Queries
+
+#### Sequence diagram
+
