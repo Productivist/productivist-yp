@@ -388,6 +388,33 @@ Result
 
 #### Sequence diagram
 
+Diagram for successive modelcert **Design** and **Cert** operations, with external calls to *productoken* chaincode. In this example, the **Customer** pays the **Expert** for the design  certification.
+
+```
+            Customer X                 Designer Y               Expert Z
+______________________________________________________________________
+                |                         |                        |
+                | -----Design-request---> |                        |
+                |                         |                        |
+  <-----productoken-Transfer-initiate---- |                        |
+                |                         |                        |
+  ------productoken-Transfer-commit-----> |                        |
+                |                         |                        |
+                | <----Design-result----- |                        |
+                |                         |                        |
+                |                                                  |
+                |                                                  |
+                | -------------------Cert-request----------------> |
+                |                                                  |
+ <-----------------productoken-Transfer-initiate------------------ |
+                |                                                  |
+ ------------------productoken-Transfer-commit-------------------> |
+                |                                                  |
+                | <------------------Cert-result------------------ |
+                |                                                  |
+______________________________________________________________________
+```
+
 
 ### The *prodcontrol* application
 
