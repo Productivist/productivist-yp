@@ -268,6 +268,26 @@ Result
 
 #### Sequence diagram
 
+Diagram for the productoken **Transfer** operation
+
+```
+                       User A                     User B
+____________________________________________________________
+                          |                          |
+ --Transfer-request-----> |                          |
+                          |                          |
+ <-------Accept---------- |                          |
+                          |                          |
+ --------------Transfer-notification---------------> |
+                          |                          |
+ <---------------------Acknowledge------------------ |
+                          |                          |
+ ----Balance-update-----> | -----------------------> |
+                          |                          |
+                          |                          |
+____________________________________________________________
+```
+
 
 ### The *modelcert* application
 
