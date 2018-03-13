@@ -436,6 +436,38 @@ A lower-level API may also just return the full JSON structure, that the client 
 
 #### Sequence diagram
 
+Diagram for successive prodcontrol **Make**,  **Update** and **Transfer** operations, with external calls to *productoken* and *qualitycheck* chaincodes.
+
+```
+            Customer X                 Producer Y               Customer Y
+______________________________________________________________________
+                |                         |                        |
+                | -----Make-request-----> |                        |
+                |                         |                        |
+  <-----productoken-Transfer-initiate---- |                        |
+                |                         |                        |
+                | <----Status-update----- |                        |
+                |                         |                        |
+  ------productoken-Transfer-commit-----> |                        |
+                |                         |                        |
+  <----------qualitycheck-initiate------- |                        |
+                |                         |                        |
+  -----------qualitycheck-validation----> |                        |
+                |                         |                        |
+                | <----Status-update----- |                        |
+                |                                                  |
+                |                                                  |
+                |                                                  |
+                | <------------------Transfer-request------------- |
+                |                                                  |
+ <-----------------productoken-Transfer-initiate------------------ |
+                |                                                  |
+ ------------------productoken-Transfer-commit-------------------> |
+                |                                                  |
+                | -------------------Transfer-accept-------------> |
+                |                                                  |
+______________________________________________________________________
+```
 
 ### The *qualitycheck* application
 
