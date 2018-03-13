@@ -579,19 +579,56 @@ ______________________________________________________________________
 ______________________________________________________________________
 ```
 
+*Note*: This sequence doesn't make the productoken payment for the object dependent on whether the qualitycheck validation run was successfull or not. This is completely dependant on the smart-contract policy and can be performed otherwise.
+
+
 ### The *qualitycheck* application
 
 #### Synopsis
 
+The **qualitycheck** chaincode is the application used to ensure that a a built object is validated for usability, or in respect to it's original model set of certifications. 
+
 #### Members and roles
 
+It usually will be up to a **Customer** or a **Producer** to request a model validation. On the other hand only an **Expert** performs the validation operation.
+
 #### Database structure
+
+We'll be using the **prodcontrol** chaincode DB structure here since we are dealing with physical objects as well.
+
+```
+my_poly_bot_uid: {
+  model: "poly_2018_ac4708f",
+  producer: "bob_the_builder_uid",
+  build_ts: "Tue, 13 Mar 2018 10:19:55 +0100",
+  status: "validated"
+}
+```
+
+However we are going to ignore the *ownership* attribute here, as the **Transfer** operation is already covered by the **prodcontrol** chaincode.
 
 #### Chaincode commands
 
 ##### Invocations
 
+  * **Validate:** operation by which an object is validated 
+
+```
+Command
+-------
+  user_x,expert_y,product_uid_z: <'validate'>
+
+Result
+------
+  product_uid_z: <model,...,'built'> -> <model,...,'validated'>
+```
+
+
 ##### Queries
+
+  * **Status:** as for the **prodcontrol** chaincode, allows to check if a model is validated or not.
+
+*Note*: As for the **prodcontrol** chaincode, a lower-level API may just return the full json structure if needed. 
 
 #### Sequence diagram
 
