@@ -310,15 +310,129 @@ ____________________________________________________________
 
 #### Synopsis
 
+The **prodcontrol** chaincode is the application that triggers a physical production process and initiates a physical object's life-cycle in the blockchain.
+
 #### Members and roles
 
+Participants are typically involved in **prodcontrol** operations are **Customers** who will pay for the process with *prod* tokens and **Producers**. 
+
 #### Database structure
+
+The key-value database unit entry here is a manufactured product. Minimal json structure example:
+
+```
+my_poly_bot_uid: {
+  model: "poly_2018_ac4708f.stl",
+  producer: "bob_the_builder_uid",
+  build_ts: "Tue, 13 Mar 2018 10:19:55 +0100"
+}
+```
+
+To support a bit more complex object tracking, during the manufacturing process and later for certification, more attributes can be supported.
+
+  * Current object **status** in: ``['ordered','building','built','certified']`` for production tracking
+  * Current **owner** for life-cycle ownership tracking
+
+As a rule of thumb when designing blockchain applications, it is worth noting that the history of the object life-cycle itself should not be managed in the database but directly retrieved from the transaction history. A radical - if not practical - implementation of this approach would lead to store only the **status** and **owner** fields and let the other informations be derived from the transaction history.
+
+A more complete structure supporting the full object life-cycle:
+
+```
+my_poly_bot_uid: {
+  model: "poly_2018_ac4708f.stl",
+  producer: "bob_the_builder_uid",
+  build_ts: "Tue, 13 Mar 2018 10:19:55 +0100",
+  status: "certified",
+  owner: "customer_x"
+}
+```
 
 #### Chaincode commands
 
 ##### Invocations
 
+For the simplest DB structure version:
+
+  * **Make:** 
+
+```
+Command
+-------
+  customer_x,producer_y: <'make', model>
+
+Result
+------
+  product_uid_z: <model,producer_y,timestamp>  
+```
+
+
+For the more complex DB structure:
+
+  * **Make:** 
+
+```
+Command
+-------
+  customer_x,producer_y: <'make', model>
+
+Result
+------
+  product_uid_z: <model,producer_y,'building',customer_x>  
+```
+
+  * **Update:** 
+
+```
+Command
+-------
+  producer_y,product_uid_z: <'update', 'built'>
+
+Result
+------
+  product_uid_z: <model,producer_y,'building',customer_x> -> <model,producer_y,'built',timestamp,customer_x>  
+```
+
+  * **Transfer:** 
+
+```
+Command
+-------
+  customer_x,customer_y,product_uid_z: <'transfer'>
+
+Result
+------
+  product_uid_z: <model,producer_y,'built',timestamp,customer_x> -> <model,producer_y,'built',timestamp,customer_y>
+```
+
 ##### Queries
+
+The **status** and **owner** attributes may be polled in order to follow the object life-cycle. 
+
+  * **Status:**
+
+```
+Query
+-------
+  product_uid_z: <'status'>
+
+Result
+------
+  product_uid_z: <status> -> 
+```
+
+  * **Owner:**
+
+```
+Query
+-------
+  product_uid_z: <'owner'>
+
+Result
+------
+  product_uid_z: <owner> -> 
+```
+
+A lower-level API may also just return the full JSON structure, that the client module would have to parse.
 
 #### Sequence diagram
 
