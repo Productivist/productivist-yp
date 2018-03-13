@@ -293,15 +293,98 @@ ____________________________________________________________
 
 #### Synopsis
 
+The **modelcert** chaincode is the application used to ensure that a model respects a given set of certifications, be it functional, of origin, or other. 
+
 #### Members and roles
 
+It can be up to any user, be it a **Customer**, a **Producer** or a **Designer** to check a model certifications. On the other hand only an **Expert** performs the reviews and certifications.
+
 #### Database structure
+
+The key-value database unit entry here is a model. Although a model may have several certifications as stated above - origin, suitability for a set of given purposes, abiding to a certain set of rules by the **Designer** and so on - we will only use one *certified* attribute. If set, the *certified* attribute states that the model received one or more certifications, which are to be retrieved in the model's transactions history.
+
+```
+poly_2018_ac4708f: {
+  name: "poly",
+  version: "ac4708f",
+  uri: "http://example.com/models/poly_2018_ac4708f.stl",
+  hash: "79d10afc247a3fd6c6239f68229c260b",
+  designer: "dave_the_designer_uid",
+  certified: 0
+}
+```
+
+*Notes*: 
+
+  * The *version* attribute - version number, git commit or whatnot - distinguishes several versions of the same model name.
+  * The *uri* attribute refers to a location where the actual model file can be retrieved, whatever the scheme employed. The *hash* attribute is used to verifiy that the model at the referred location hasn't changed.
+  * The *certified* attribute is only valid for the current instance of the model. Any other version, even with trivial differences, should also go through the certification process. The semantics of the attribute are deliberately lax: any nonzero / non-null value will be considered as a boolean positive, and may be also interpreted as a bitfield, a comma-separated string or any mean of convenience that may be used in most cases to avoid going through the ledger to check for a given certification.
 
 #### Chaincode commands
 
 ##### Invocations
 
+  * **Certify:** operation implemented with *certified* attribute used as a bitfield.
+
+```
+Command
+-------
+  user_x,expert_y,model_uid_z: <'certify', cert_id>
+
+Result
+------
+  model_uid_z: <name,...,certified> -> <name,...,certified|cert_id>
+```
+
+  * **Design:** operation by which a **Customer** summons a **Designer** create a model. *Note*: this operation will probably end-up in a separate application, but *modelcert* for now is the app that deals with models as DB entries.
+
+```
+Command
+-------
+  customer_x,designer_y: <'design', name, specs>
+
+Result
+------
+  model_uid_z: <name,...,designer_y,0>  
+```
+
 ##### Queries
+
+  * **FileCheck:** verify a file at a given uri against the model's hash.
+
+```
+Query
+-------
+  model_uid_z: <'fileCheck', uri>
+
+Result
+------
+  model_uid_z: <True|False> -> 
+```
+
+  * **CertCheck:** Queries the ledger for a given certificate
+
+```
+Query
+-------
+  model_uid_z: <'certCheck', cert_id>
+
+Result
+------
+  model_uid_z: <cert_id,expert_id> -> 
+```
+
+  * **CertList:** Queries the ledger all certificates on a given model
+
+```
+Query
+-------
+  model_uid_z: <'certList'>
+
+Result
+------
+  model_uid_z: <cert_id,expert_id>* -> 
+```
 
 #### Sequence diagram
 
@@ -322,7 +405,7 @@ The key-value database unit entry here is a manufactured product. Minimal json s
 
 ```
 my_poly_bot_uid: {
-  model: "poly_2018_ac4708f.stl",
+  model: "poly_2018_ac4708f",
   producer: "bob_the_builder_uid",
   build_ts: "Tue, 13 Mar 2018 10:19:55 +0100"
 }
@@ -330,7 +413,7 @@ my_poly_bot_uid: {
 
 To support a bit more complex object tracking, during the manufacturing process and later for certification, more attributes can be supported.
 
-  * Current object **status** in: ``['ordered','building','built','certified']`` for production tracking
+  * Current object **status** in: ``['ordered','building','built','validated']`` for production tracking
   * Current **owner** for life-cycle ownership tracking
 
 As a rule of thumb when designing blockchain applications, it is worth noting that the history of the object life-cycle itself should not be managed in the database but directly retrieved from the transaction history. A radical - if not practical - implementation of this approach would lead to store only the **status** and **owner** fields and let the other informations be derived from the transaction history.
@@ -339,10 +422,10 @@ A more complete structure supporting the full object life-cycle:
 
 ```
 my_poly_bot_uid: {
-  model: "poly_2018_ac4708f.stl",
+  model: "poly_2018_ac4708f",
   producer: "bob_the_builder_uid",
   build_ts: "Tue, 13 Mar 2018 10:19:55 +0100",
-  status: "certified",
+  status: "validated",
   owner: "customer_x"
 }
 ```
@@ -432,7 +515,7 @@ Result
   product_uid_z: <owner> -> 
 ```
 
-A lower-level API may also just return the full JSON structure, that the client module would have to parse.
+A lower-level API may also just return the full json structure, that the client module would have to parse.
 
 #### Sequence diagram
 
