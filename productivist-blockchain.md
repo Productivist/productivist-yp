@@ -632,3 +632,23 @@ Result
 
 #### Sequence diagram
 
+Diagram for prodcontrol **Validate** operation, with external calls to *productoken* chaincode. In this example, the **Customer** pays the **Expert** for the product validation.
+
+```
+            Customer X                                          Expert Y
+______________________________________________________________________
+                |                                                  |
+                |                                                  |
+                | ---------------Validation-request--------------> |
+                |                                                  |
+ <-----------------productoken-Transfer-initiate------------------ |
+                |                                                  |
+ ------------------productoken-Transfer-commit-------------------> |
+                |                                                  |
+                | <--------------Validation-result---------------- |
+                |                                                  |
+______________________________________________________________________
+```
+
+
+
